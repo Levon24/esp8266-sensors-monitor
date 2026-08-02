@@ -34,7 +34,7 @@ void app_main(void) {
 
 	// WiFi
   ESP_ERROR_CHECK(nvs_flash_init());
-  wifi_init_sta();
+  wifi_init_station();
 
 	// Sensors
   ESP_ERROR_CHECK(i2c_master_init());

@@ -51,7 +51,7 @@ void wifi_event_handler(void* arg, esp_event_base_t event_base, int32_t event_id
 	}
 }
 
-void wifi_init_sta(void) {
+void wifi_init_station(void) {
 	s_wifi_event_group = xEventGroupCreate();
 
 	tcpip_adapter_init();
@@ -76,7 +76,7 @@ void wifi_init_sta(void) {
 	 * doesn't support WPA2, these mode can be enabled by commenting below line */
 
 	if (strlen((char *)wifi_config.sta.password)) {
-		wifi_config.sta.threshold.authmode = WIFI_AUTH_WPA2_PSK;
+		wifi_config.sta.threshold.authmode = WIFI_AUTH_WPA2_WPA3_PSK;
 	}
 
 	ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));
@@ -87,18 +87,14 @@ void wifi_init_sta(void) {
 
 	/* Waiting until either the connection is established (WIFI_CONNECTED_BIT) or connection failed for the maximum
 	 * number of re-tries (WIFI_FAIL_BIT). The bits are set by event_handler() (see above) */
-	EventBits_t bits = xEventGroupWaitBits(s_wifi_event_group,
-					WIFI_CONNECTED_BIT | WIFI_FAIL_BIT,
-					pdFALSE,
-					pdFALSE,
-					portMAX_DELAY);
+	EventBits_t bits = xEventGroupWaitBits(s_wifi_event_group, WIFI_CONNECTED_BIT | WIFI_FAIL_BIT, pdFALSE,	pdFALSE, portMAX_DELAY);
 
 	/* xEventGroupWaitBits() returns the bits before the call returned, hence we can test which event actually
 	 * happened. */
 	if (bits & WIFI_CONNECTED_BIT) {
-		ESP_LOGI(WIFI, "Connected to ap SSID:%s password:%s", ESP_WIFI_SSID, ESP_WIFI_PASS);
+		ESP_LOGI(WIFI, "Connected to ap SSID:%s", ESP_WIFI_SSID);
 	} else if (bits & WIFI_FAIL_BIT) {
-		ESP_LOGI(WIFI, "Failed to connect to SSID:%s, password:%s", ESP_WIFI_SSID, ESP_WIFI_PASS);
+		ESP_LOGI(WIFI, "Failed to connect to SSID:%s, Password:%s", ESP_WIFI_SSID, ESP_WIFI_PASS);
 	} else {
 		ESP_LOGE(WIFI, "UNEXPECTED EVENT");
 	}

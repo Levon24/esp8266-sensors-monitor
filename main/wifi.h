@@ -11,7 +11,7 @@ extern "C" {
 #define ESP_MAXIMUM_RETRY  CONFIG_ESP_MAXIMUM_RETRY
 
 //
-void wifi_init_sta(void);
+void wifi_init_station(void);
 
 #ifdef __cplusplus
 }
