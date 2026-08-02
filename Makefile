@@ -3,7 +3,7 @@
 # project subdirectory.
 #
 
-PROJECT_NAME := esp8266-sensors-monitor
+PROJECT_NAME := esp8266_sensors_monitor
 
 include $(IDF_PATH)/make/project.mk
 
