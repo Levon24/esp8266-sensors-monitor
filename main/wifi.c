@@ -76,7 +76,7 @@ void wifi_init_station(void) {
 	 * doesn't support WPA2, these mode can be enabled by commenting below line */
 
 	if (strlen((char *)wifi_config.sta.password)) {
-		wifi_config.sta.threshold.authmode = WIFI_AUTH_WPA2_WPA3_PSK;
+		wifi_config.sta.threshold.authmode = WIFI_AUTH_WPA2_PSK;
 	}
 
 	ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_STA));

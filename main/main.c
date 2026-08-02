@@ -16,6 +16,7 @@
 #include "esp_log.h"
 #include "main.h"
 #include "wifi.h"
+#include "oled.h"
 #include "aht20.h"
 
 /**
@@ -35,6 +36,9 @@ void app_main(void) {
 	// WiFi
   ESP_ERROR_CHECK(nvs_flash_init());
   wifi_init_station();
+
+  // OLED
+  xTaskCreate(oled_task, "oled", 2048, NULL, 5, NULL);
 
 	// Sensors
   ESP_ERROR_CHECK(i2c_master_init());
