@@ -50,7 +50,7 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-build/*
+build/
 
 # debug information files
 *.dwo
@@ -58,6 +58,7 @@ build/*
 # Eclipse 
 .cproject
 .project
+.settings/
 
 # SDK
 sdkconfig.old
