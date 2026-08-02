@@ -54,3 +54,10 @@ build/*
 
 # debug information files
 *.dwo
+
+# Eclipse 
+.cproject
+.project
+
+# SDK
+sdkconfig.old
